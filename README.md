@@ -6,71 +6,47 @@ Demonstrates data extraction, transformation, and loading directly from PySpark 
 
 # Setup Instructions
 
-## 1. Install Java (OpenJDK 17)
-```bash
-sudo apt update
-sudo apt install openjdk-17-jdk -y
-java -version
-```
-## 2. Install PySpark
-```bash
-pip install pyspark
-```
-## 3. Install PostgreSQL + JDBC Driver
-```bash
-sudo apt install postgresql postgresql-contrib -y
-```
-Download JDBC driver:
-```bash
-wget https://jdbc.postgresql.org/download/postgresql-42.7.3.jar
-```
+## 1. Clone the Repository
+git clone https://github.com/<your-repo-name>.git
+cd <your-repo-name>
 
-Move it:
-```bash
-mv postgresql-42.7.3.jar /home/lana/ETL_Pipeline_4/jars/
-```
-## 4. Set Java Home (WSL)
-export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
-Reload shell:
-```bash
-source ~/.bashrc
-```
-## 5. Open Jupyter Notebook
-```bash
-jupyter notebook
-```
-## Run the Notebook
-Extract
-df = spark.read.csv(csv_path, header=True, inferSchema=True)
-df.show(5)
+## 2. Create and Activate Virtual Environment (optional)
+python3 -m venv venv
+source venv/bin/activate
 
-Transform
-df_transformed = df.filter(col("age") > 25)
-df_transformed.show(5)
+## 3. Install Dependencies
+pip install -r requirements.txt
 
-Load
-```bash
-df_transformed.write.jdbc(
-    url="jdbc:postgresql://localhost:5432/postgres",
-    table="employee_py",
-    mode="overwrite",
-    properties={
-        "user": "postgres",
-        "password": "lana",
-        "driver": "org.postgresql.Driver"
-    }
-)
-```
-Step 5: Start PostgreSQL
-```bash
-sudo service postgresql start
-```
-Open PostgreSQL:
-```bash
-psql -U postgres
-```
+## 4. Set JAVA_HOME for WSL (required for PySpark)
 
-List tables:
-```bash
-\dt
-```
+Add this line to your terminal before running the script:
+
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+
+## 5. Add PostgreSQL JDBC Driver
+
+Download the driver and place it in a folder named jars inside your project:
+
+postgresql-42.7.3.jar
+
+
+Update the path inside main.ipynb or main.py if needed.
+
+## 6. Update File Path
+
+Inside the script, update the CSV file path:
+
+csv_path = "/path/to/your/file.csv"
+
+## 7. Start PostgreSQL
+
+Ensure PostgreSQL is running locally on port 5432.
+Your credentials must match:
+
+user: postgres
+password: lana
+database: postgres
+
+## 8. Run the ETL Pipeline
+python main.py
+
