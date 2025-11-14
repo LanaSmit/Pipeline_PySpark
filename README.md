@@ -7,46 +7,59 @@ Demonstrates data extraction, transformation, and loading directly from PySpark 
 # Setup Instructions
 
 ## 1. Clone the Repository
+
+Run in the terminal:
+```bash
 git clone https://github.com/<your-repo-name>.git
 cd <your-repo-name>
-
+```
 ## 2. Create and Activate Virtual Environment (optional)
+
+Run in the terminal:
+```bash
 python3 -m venv venv
 source venv/bin/activate
-
+```
 ## 3. Install Dependencies
-pip install -r requirements.txt
 
+Run in the terminal:
+```bash
+pip install -r requirements.txt
+```
 ## 4. Set JAVA_HOME for WSL (required for PySpark)
 
-Add this line to your terminal before running the script:
-
+Run in the terminal:
+```bash
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-
+```
 ## 5. Add PostgreSQL JDBC Driver
 
 Download the driver and place it in a folder named jars inside your project:
-
+```bash
 postgresql-42.7.3.jar
-
+```
 
 Update the path inside main.ipynb or main.py if needed.
 
 ## 6. Update File Path
 
-Inside the script, update the CSV file path:
-
+Inside the script, update the CSV file path to your path:
+```bash
 csv_path = "/path/to/your/file.csv"
-
+```
 ## 7. Start PostgreSQL
 
-Ensure PostgreSQL is running locally on port 5432.
-Your credentials must match:
-
-user: postgres
-password: lana
-database: postgres
-
+Make sure your local PostgreSQL instance is active and that your connection details match your own setup in the yaml file:
+```bash
+host: localhost
+port: 5432
+user: <your-username>
+password: <your-password>
+database: <your-database-name>
+```
 ## 8. Run the ETL Pipeline
-python main.py
 
+Run in the terminal:
+```bash
+python main.py
+```
